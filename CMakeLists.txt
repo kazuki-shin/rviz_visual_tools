@@ -61,7 +61,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 catkin_package(
   LIBRARIES
     ${PROJECT_NAME}
-    ${PROJECT_NAME}_gui
+    ${PROJECT_NAME}_gui_papras
     ${PROJECT_NAME}_remote_control
     ${PROJECT_NAME}_imarker_simple
   CATKIN_DEPENDS
@@ -89,6 +89,7 @@ include_directories(SYSTEM include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS}
 
 set(SOURCE_FILES
   src/${PROJECT_NAME}_gui.cpp
+  src/${PROJECT_NAME}_gui_papras.cpp
   src/key_tool.cpp
 )
 
@@ -96,6 +97,10 @@ set(SOURCE_FILES
 add_library(${PROJECT_NAME}_gui ${SOURCE_FILES} src/remote_control.cpp)
 set_target_properties(${PROJECT_NAME}_gui PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 target_link_libraries(${PROJECT_NAME}_gui ${rviz_DEFAULT_PLUGIN_LIBRARIES} ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
+add_library(${PROJECT_NAME}_gui_papras ${SOURCE_FILES} src/remote_control.cpp)
+set_target_properties(${PROJECT_NAME}_gui_papras PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
+target_link_libraries(${PROJECT_NAME}_gui_papras ${rviz_DEFAULT_PLUGIN_LIBRARIES} ${QT_LIBRARIES} ${catkin_LIBRARIES})
 
 # Remote control library
 add_library(${PROJECT_NAME}_remote_control src/remote_control.cpp)
@@ -174,6 +179,7 @@ install(
   TARGETS
     ${PROJECT_NAME}
     ${PROJECT_NAME}_gui
+    ${PROJECT_NAME}_gui_papras
     ${PROJECT_NAME}_imarker_simple
     ${PROJECT_NAME}_remote_control
   LIBRARY DESTINATION
