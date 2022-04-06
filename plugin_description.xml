@@ -7,6 +7,14 @@
     </description>
   </class>
 
+  <class name="rviz_visual_tools/RvizVisualToolsGuiPAPRAS"
+         type="rviz_visual_tools::RvizVisualToolsGuiPAPRAS"
+         base_class_type="rviz::Panel">
+    <description>
+      A panel widget allowing control of a ROS pipeline
+    </description>
+  </class>
+
   <class name="rviz_visual_tools/KeyTool" type="rviz_visual_tools::KeyTool" base_class_type="rviz::Tool">
     <description>
       Tool to capture keyboard input
