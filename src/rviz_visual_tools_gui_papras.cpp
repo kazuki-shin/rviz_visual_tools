@@ -24,6 +24,10 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   connect(btn_arm1_high_, SIGNAL(clicked()), this, SLOT(moveArm1High()));
   btn_arm1_forward_ = new QPushButton(this); btn_arm1_forward_->setText("arm1 forward");
   connect(btn_arm1_forward_, SIGNAL(clicked()), this, SLOT(moveArm1Forward()));
+  btn_arm1_candy_rest_ = new QPushButton(this); btn_arm1_candy_rest_->setText("arm1 candy_rest");
+  connect(btn_arm1_candy_rest_, SIGNAL(clicked()), this, SLOT(moveArm1CandyRest()));
+  btn_arm1_candy_forward_ = new QPushButton(this); btn_arm1_candy_forward_->setText("arm1 candy_forward");
+  connect(btn_arm1_candy_forward_, SIGNAL(clicked()), this, SLOT(moveArm1CandyForward()));
 
   // Arm 2 Poses
   btn_arm2_rest_ = new QPushButton(this); btn_arm2_rest_->setText("arm2 rest");
@@ -34,6 +38,10 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   connect(btn_arm2_high_, SIGNAL(clicked()), this, SLOT(moveArm2High()));
   btn_arm2_forward_ = new QPushButton(this); btn_arm2_forward_->setText("arm2 forward");
   connect(btn_arm2_forward_, SIGNAL(clicked()), this, SLOT(moveArm2Forward()));
+  btn_arm2_candy_rest_ = new QPushButton(this); btn_arm2_candy_rest_->setText("arm2 candy_rest");
+  connect(btn_arm2_candy_rest_, SIGNAL(clicked()), this, SLOT(moveArm2CandyRest()));
+  btn_arm2_candy_forward_ = new QPushButton(this); btn_arm2_candy_forward_->setText("arm2 candy_forward");
+  connect(btn_arm2_candy_forward_, SIGNAL(clicked()), this, SLOT(moveArm2CandyForward()));
 
   // Arm 1_2 Poses
   btn_arm1_2_rest_ = new QPushButton(this); btn_arm1_2_rest_->setText("arm1_2 rest");
@@ -44,6 +52,10 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   connect(btn_arm1_2_high_, SIGNAL(clicked()), this, SLOT(moveArm1_2High()));
   btn_arm1_2_forward_ = new QPushButton(this); btn_arm1_2_forward_->setText("arm1_2 forward");
   connect(btn_arm1_2_forward_, SIGNAL(clicked()), this, SLOT(moveArm1_2Forward()));
+  btn_arm1_2_candy_rest_ = new QPushButton(this); btn_arm1_2_candy_rest_->setText("arm1_2 candy_rest");
+  connect(btn_arm1_2_candy_rest_, SIGNAL(clicked()), this, SLOT(moveArm1_2CandyRest()));
+  btn_arm1_2_candy_forward_ = new QPushButton(this); btn_arm1_2_candy_forward_->setText("arm1_2 candy_forward");
+  connect(btn_arm1_2_candy_forward_, SIGNAL(clicked()), this, SLOT(moveArm1_2CandyForward()));
 
   // Gripper 1 Poses
   btn_gripper1_open_ = new QPushButton(this); btn_gripper1_open_->setText("gripper1 open");
@@ -69,18 +81,24 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   planning_group1->addWidget(btn_arm1_main_);
   planning_group1->addWidget(btn_arm1_high_);
   planning_group1->addWidget(btn_arm1_forward_);
+  planning_group1->addWidget(btn_arm1_candy_rest_);
+  planning_group1->addWidget(btn_arm1_candy_forward_);
 
   auto* planning_group2 = new QHBoxLayout;
   planning_group2->addWidget(btn_arm2_rest_);
   planning_group2->addWidget(btn_arm2_main_);
   planning_group2->addWidget(btn_arm2_high_);
   planning_group2->addWidget(btn_arm2_forward_);
+  planning_group2->addWidget(btn_arm2_candy_rest_);
+  planning_group2->addWidget(btn_arm2_candy_forward_);
 
   auto* planning_group3 = new QHBoxLayout;
   planning_group3->addWidget(btn_arm1_2_rest_);
   planning_group3->addWidget(btn_arm1_2_main_);
   planning_group3->addWidget(btn_arm1_2_high_);
   planning_group3->addWidget(btn_arm1_2_forward_);
+  planning_group3->addWidget(btn_arm1_2_candy_rest_);
+  planning_group3->addWidget(btn_arm1_2_candy_forward_);
 
   auto* planning_group4 = new QHBoxLayout;
   planning_group4->addWidget(btn_gripper1_open_);
@@ -103,11 +121,6 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   layout->addLayout(planning_group5);
   layout->addLayout(planning_group6);
   setLayout(layout);
-
-  btn_arm1_rest_->setEnabled(true);
-  btn_arm1_main_->setEnabled(true);
-  btn_arm1_high_->setEnabled(true);
-  btn_arm1_forward_->setEnabled(true);
 
   gui_publisher_ = nh_.advertise<std_msgs::String>("/rviz_visual_tools_gui_papras", 1);
 }
@@ -133,6 +146,16 @@ void RvizVisualToolsGuiPAPRAS::moveArm1Forward() {
   msg.data = "arm1_forward";
   gui_publisher_.publish(msg);
 }
+void RvizVisualToolsGuiPAPRAS::moveArm1CandyRest() {
+  std_msgs::String msg;
+  msg.data = "arm1_candyrest";
+  gui_publisher_.publish(msg);
+}
+void RvizVisualToolsGuiPAPRAS::moveArm1CandyForward() {
+  std_msgs::String msg;
+  msg.data = "arm1_candyforward";
+  gui_publisher_.publish(msg);
+}
 
 // Arm 2 move
 void RvizVisualToolsGuiPAPRAS::moveArm2Rest() {
@@ -155,6 +178,16 @@ void RvizVisualToolsGuiPAPRAS::moveArm2Forward() {
   msg.data = "arm2_forward";
   gui_publisher_.publish(msg);
 }
+void RvizVisualToolsGuiPAPRAS::moveArm2CandyRest() {
+  std_msgs::String msg;
+  msg.data = "arm2_candyrest";
+  gui_publisher_.publish(msg);
+}
+void RvizVisualToolsGuiPAPRAS::moveArm2CandyForward() {
+  std_msgs::String msg;
+  msg.data = "arm2_candyforward";
+  gui_publisher_.publish(msg);
+}
 
 // Arm 1_2 move
 void RvizVisualToolsGuiPAPRAS::moveArm1_2Rest() {
@@ -175,6 +208,16 @@ void RvizVisualToolsGuiPAPRAS::moveArm1_2High() {
 void RvizVisualToolsGuiPAPRAS::moveArm1_2Forward() {
   std_msgs::String msg;
   msg.data = "arm1_2_forward";
+  gui_publisher_.publish(msg);
+}
+void RvizVisualToolsGuiPAPRAS::moveArm1_2CandyRest() {
+  std_msgs::String msg;
+  msg.data = "arm1_2_candyrest";
+  gui_publisher_.publish(msg);
+}
+void RvizVisualToolsGuiPAPRAS::moveArm1_2CandyForward() {
+  std_msgs::String msg;
+  msg.data = "arm1_2_candyforward";
   gui_publisher_.publish(msg);
 }
 

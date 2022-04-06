@@ -32,16 +32,22 @@ protected Q_SLOTS:
   void moveArm1Main();
   void moveArm1High();
   void moveArm1Forward();
+  void moveArm1CandyRest();
+  void moveArm1CandyForward();
 
   void moveArm2Rest();
   void moveArm2Main();
   void moveArm2High();
   void moveArm2Forward();
+  void moveArm2CandyRest();
+  void moveArm2CandyForward();
 
   void moveArm1_2Rest();
   void moveArm1_2Main();
   void moveArm1_2High();
   void moveArm1_2Forward();
+  void moveArm1_2CandyRest();
+  void moveArm1_2CandyForward();
 
   void moveGripper1Open();
   void moveGripper1Close();
@@ -57,16 +63,22 @@ protected:
   QPushButton* btn_arm1_main_;
   QPushButton* btn_arm1_high_;
   QPushButton* btn_arm1_forward_;
+  QPushButton* btn_arm1_candy_rest_;
+  QPushButton* btn_arm1_candy_forward_;
   
   QPushButton* btn_arm2_rest_;
   QPushButton* btn_arm2_main_;
   QPushButton* btn_arm2_high_;
   QPushButton* btn_arm2_forward_;
+  QPushButton* btn_arm2_candy_rest_;
+  QPushButton* btn_arm2_candy_forward_;
 
   QPushButton* btn_arm1_2_rest_;
   QPushButton* btn_arm1_2_main_;
   QPushButton* btn_arm1_2_high_;
   QPushButton* btn_arm1_2_forward_;
+  QPushButton* btn_arm1_2_candy_rest_;
+  QPushButton* btn_arm1_2_candy_forward_;
 
   QPushButton* btn_gripper1_open_;
   QPushButton* btn_gripper1_close_;
