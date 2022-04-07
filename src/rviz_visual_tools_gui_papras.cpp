@@ -75,6 +75,13 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   btn_gripper1_2_close_ = new QPushButton(this); btn_gripper1_2_close_->setText("gripper1_2 close");
   connect(btn_gripper1_2_close_, SIGNAL(clicked()), this, SLOT(moveGripper1_2Close()));
 
+  // Torque Status
+  btn_torque_on_ = new QPushButton(this); btn_torque_on_->setText("Torque On");
+  connect(btn_torque_on_, SIGNAL(clicked()), this, SLOT(torqueOn()));
+  btn_torque_off_ = new QPushButton(this); btn_torque_off_->setText("Torque Off");
+  connect(btn_torque_off_, SIGNAL(clicked()), this, SLOT(torqueOff()));
+
+
   // Horizontal Layout
   auto* planning_group1 = new QHBoxLayout;
   planning_group1->addWidget(btn_arm1_rest_);
@@ -112,6 +119,10 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   planning_group6->addWidget(btn_gripper1_2_open_);
   planning_group6->addWidget(btn_gripper1_2_close_);
 
+  auto* planning_group7 = new QHBoxLayout;
+  planning_group7->addWidget(btn_torque_on_);
+  planning_group7->addWidget(btn_torque_off_);
+
   // Verticle layout
   auto* layout = new QVBoxLayout;
   layout->addLayout(planning_group1);
@@ -120,9 +131,11 @@ RvizVisualToolsGuiPAPRAS::RvizVisualToolsGuiPAPRAS(QWidget* parent) : rviz::Pane
   layout->addLayout(planning_group4);
   layout->addLayout(planning_group5);
   layout->addLayout(planning_group6);
+  layout->addLayout(planning_group7);
   setLayout(layout);
 
   gui_publisher_ = nh_.advertise<std_msgs::String>("/rviz_visual_tools_gui_papras", 1);
+  torque_publisher_ = nh_.advertise<std_msgs::Bool>("/torque_status", 1);
 }
 
 // Arm 1 move
@@ -256,6 +269,18 @@ void RvizVisualToolsGuiPAPRAS::moveGripper1_2Close() {
   std_msgs::String msg;
   msg.data = "gripper1_2_close";
   gui_publisher_.publish(msg);
+}
+
+void RvizVisualToolsGuiPAPRAS::torqueOn() {
+  std_msgs::Bool msg;
+  msg.data = true;
+  torque_publisher_.publish(msg);
+}
+
+void RvizVisualToolsGuiPAPRAS::torqueOff() {
+  std_msgs::Bool msg;
+  msg.data = false;
+  torque_publisher_.publish(msg);
 }
 
 

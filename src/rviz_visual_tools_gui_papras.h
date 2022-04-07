@@ -3,6 +3,7 @@
 #ifndef Q_MOC_RUN
 #include <ros/ros.h>
 #include "std_msgs/String.h"
+#include "std_msgs/Bool.h"
 
 #include <rviz/panel.h>
 #endif
@@ -58,6 +59,9 @@ protected Q_SLOTS:
   void moveGripper1_2Open();
   void moveGripper1_2Close();
 
+  void torqueOn();
+  void torqueOff();
+
 protected:
   QPushButton* btn_arm1_rest_;
   QPushButton* btn_arm1_main_;
@@ -89,8 +93,13 @@ protected:
   QPushButton* btn_gripper1_2_open_;
   QPushButton* btn_gripper1_2_close_;
 
+  QPushButton* btn_torque_on_;
+  QPushButton* btn_torque_off_;
+
+
   ros::NodeHandle nh_;
   ros::Publisher gui_publisher_;
+  ros::Publisher torque_publisher_;
 };
 
 }  // end namespace rviz_visual_tools
